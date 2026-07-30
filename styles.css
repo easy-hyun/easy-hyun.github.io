@@ -32,11 +32,48 @@ h1 span { color: var(--muted); display: block; font-size: .34em; letter-spacing:
 .text-link { border-bottom: 1px solid var(--accent); color: var(--accent); display: inline-block; padding-bottom: 2px; }
 .section-heading { border-top: 1px solid var(--line); padding-top: 56px; }
 h2 { font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -.06em; }
-.research-card, .game-placeholder { background: var(--panel); border: 1px solid var(--line); margin: 26px 0 120px; padding: 34px; }
+.research-card, .game-placeholder, .detail-card, .game-card { background: var(--panel); border: 1px solid var(--line); margin: 26px 0 120px; padding: 34px; }
 .research-card { align-items: flex-start; display: flex; gap: 34px; }
+.detail-card { margin-bottom: 28px; }
+.detail-card p:last-child { color: var(--muted); margin-bottom: 0; }
+.detail-card h3 { margin-bottom: 8px; }
+.card-grid { display: grid; gap: 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.card-grid .detail-card { margin-bottom: 92px; }
+.timeline-item { display: grid; gap: 4px 20px; grid-template-columns: 190px 1fr; }
+.timeline-item span { color: var(--accent); font-size: .8rem; grid-row: span 2; }
+.timeline-item h3 { margin: 0; }
+.contact-card { align-items: center; display: flex; gap: 24px; justify-content: space-between; margin-bottom: 120px; }
+.contact-card span { color: var(--muted); }
+.games-grid { display: grid; gap: 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.game-card { margin-bottom: 120px; padding: 26px; }
+.game-card-heading { align-items: flex-start; display: flex; justify-content: space-between; min-height: 70px; }
+.game-card h3 { font-size: 1.6rem; margin: 0; }
+.score-board { color: var(--muted); display: flex; flex-direction: column; font-size: .75rem; gap: 4px; text-align: right; }
+.score-board strong { color: var(--accent); font-size: 1rem; margin-left: 6px; }
+.snake-board-wrap { position: relative; }
+#snake-canvas { background: #0a0d0d; border: 1px solid var(--line); display: block; height: auto; image-rendering: pixelated; max-width: 100%; width: 100%; }
+.game-status { color: var(--muted); font-size: .8rem; margin: 12px 0; min-height: 1.4em; }
+.game-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.game-button { background: var(--accent); border: 1px solid var(--accent); color: #081008; cursor: pointer; font: inherit; font-size: .8rem; font-weight: 800; padding: 10px 16px; }
+.game-button:disabled { cursor: not-allowed; opacity: .45; }
+.game-button.secondary { background: transparent; color: var(--text); }
+.game-button:focus-visible, .direction-pad button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.direction-pad { display: none; margin-top: 16px; text-align: center; }
+.direction-pad > button, .direction-pad div { display: flex; gap: 8px; justify-content: center; }
+.direction-pad button { background: #1a1e22; border: 1px solid var(--line); color: var(--text); font-size: 1.1rem; height: 42px; min-width: 42px; }
+.game-help { color: var(--muted); font-size: .75rem; margin: 14px 0 0; }
+.slot-machine { display: grid; gap: 8px; grid-template-columns: repeat(3, 1fr); margin: 28px 0 18px; }
+.slot-reel { align-items: center; background: #08090b; border: 1px solid var(--line); display: flex; font-size: clamp(2rem, 5vw, 3.5rem); height: 120px; justify-content: center; }
+.slot-reel.is-spinning { animation: reel-shake .12s linear infinite; }
+.slot-result { color: var(--muted); min-height: 3.2em; }
+@keyframes reel-shake { 50% { transform: translateY(3px); } }
 .card-index, .placeholder-mark { color: var(--accent); font-size: .8rem; font-weight: 700; }
 .research-card h3, .game-placeholder h3 { font-size: 1.5rem; margin-bottom: 8px; }
 .research-card p:last-child, .game-placeholder p:last-child { color: var(--muted); margin-bottom: 0; }
+.paper-list { display: grid; gap: 16px; margin-bottom: 120px; }
+.paper-card { background: var(--panel); border: 1px solid var(--line); padding: 24px; }
+.paper-card h3 { font-size: 1.05rem; line-height: 1.35; margin-bottom: 12px; }
+.paper-card p:last-child { color: var(--muted); margin-bottom: 0; }
 .game-placeholder { min-height: 220px; }
 .placeholder-mark { font-size: 2rem; line-height: 1; }
 .site-footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; justify-content: space-between; padding-bottom: 28px; padding-top: 28px; }
@@ -50,9 +87,17 @@ h2 { font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -.06em; }
   .site-nav a { padding: 10px; }
   .section-shell { padding-left: 20px; padding-right: 20px; }
   .hero { min-height: 70vh; padding-bottom: 80px; padding-top: 110px; }
-  .research-card { gap: 18px; margin-bottom: 80px; padding: 24px; }
-  .game-placeholder { margin-bottom: 80px; padding: 24px; }
+  .research-card, .detail-card { gap: 18px; margin-bottom: 80px; padding: 24px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .games-grid { grid-template-columns: 1fr; }
+  .timeline-item { display: block; }
+  .timeline-item span { display: block; margin-bottom: 8px; }
+  .contact-card { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .game-placeholder, .game-card { margin-bottom: 80px; padding: 24px; }
+  .direction-pad { display: block; }
+  .slot-reel { height: 92px; }
   .site-footer { align-items: flex-start; flex-direction: column; gap: 8px; }
 }
 
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media (min-width: 641px) and (max-width: 900px) { .games-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .slot-reel.is-spinning { animation: none; } }

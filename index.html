@@ -7,20 +7,25 @@
     <title>이지현 | TTS &amp; Vocoder Research</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <script src="game.js" defer></script>
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="홈으로 이동">JH<span>.</span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">메뉴</button>
       <nav id="site-nav" class="site-nav" aria-label="주요 메뉴">
+        <a href="#home">Home</a>
         <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
         <a href="#research">Research</a>
         <a href="#games">Games</a>
+        <a href="#contact">Contact</a>
       </nav>
     </header>
 
     <main id="top">
-      <section id="about" class="hero section-shell" aria-labelledby="hero-title">
+      <section id="home" class="hero section-shell" aria-labelledby="hero-title">
         <p class="eyebrow">AI · SPEECH · RESEARCH</p>
         <h1 id="hero-title">이지현 <span>Ji-Hyun Lee</span></h1>
         <p class="hero-copy">TTS와 Vocoder를 연구하는 AI 엔지니어입니다.</p>
@@ -29,6 +34,37 @@
           <span>삼성전자 MX사업부</span>
         </div>
         <a class="text-link" href="https://scholar.google.com/citations?user=Hz8p4gcAAAAJ&amp;hl=ko" target="_blank" rel="noreferrer">Google Scholar 보기 ↗</a>
+      </section>
+
+      <section id="about" class="section-shell" aria-labelledby="about-title">
+        <div class="section-heading">
+          <p class="eyebrow">01 / PROFILE</p>
+          <h2 id="about-title">About</h2>
+        </div>
+        <div class="detail-card">
+          <p>음성 AI를 연구해 온 이지현입니다. 고려대학교 대학원에서 석사과정을 마쳤고, 현재 삼성전자 MX사업부에서 일하고 있습니다.</p>
+        </div>
+      </section>
+
+      <section id="projects" class="section-shell" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <p class="eyebrow">02 / WORK</p>
+          <h2 id="projects-title">Projects</h2>
+        </div>
+        <div class="card-grid">
+          <article class="detail-card"><p class="card-index">01</p><h3>TTS</h3><p>텍스트를 자연스러운 음성으로 변환하는 연구 프로젝트입니다.</p></article>
+          <article class="detail-card"><p class="card-index">02</p><h3>Vocoder</h3><p>음성 신호를 자연스럽게 복원하고 생성하는 연구 프로젝트입니다.</p></article>
+        </div>
+      </section>
+
+      <section id="experience" class="section-shell" aria-labelledby="experience-title">
+        <div class="section-heading">
+          <p class="eyebrow">03 / PATH</p>
+          <h2 id="experience-title">Experience</h2>
+        </div>
+        <div class="detail-card timeline-item"><span>2014.03 — 2020.08</span><h3>경희대학교</h3><p>수학과</p></div>
+        <div class="detail-card timeline-item"><span>2020.09 — 2022.08</span><h3>고려대학교 대학원</h3><p>석사과정 졸업 · 인공지능학과 · PRML 연구실 음성팀</p></div>
+        <div class="detail-card timeline-item"><span>Current</span><h3>삼성전자 MX사업부</h3><p>현재 소속</p></div>
       </section>
 
       <section id="research" class="section-shell" aria-labelledby="research-title">
@@ -43,6 +79,12 @@
             <p>음성합성과 음성 신호를 더 자연스럽게 만드는 연구를 진행했습니다.</p>
           </div>
         </article>
+        <div class="paper-list" aria-label="주요 논문">
+          <p class="eyebrow">주요 논문</p>
+          <article class="paper-card"><p class="card-index">01</p><h3>HierSpeech: Bridging the Gap between Text and Speech by Hierarchical Variational Inference using Self-supervised Representations for Speech Synthesis</h3><p>Sang Hoon Lee, Seung Bin Kim, Ji Hyun Lee, Eunwoo Song, Min Jae Hwang, Seong Whan Lee · NeurIPS · 2022</p></article>
+          <article class="paper-card"><p class="card-index">02</p><h3>PVAE-TTS: Adaptive Text-to-Speech via Progressive Style Adaptation</h3><p>Ji Hyun Lee, Sang Hoon Lee, Ji Hoon Kim, Seong Whan Lee · ICASSP · 2022</p></article>
+          <article class="paper-card"><p class="card-index">03</p><h3>GC-TTS: Few-shot Speaker Adaptation with Geometric Constraints</h3><p>Ji Hoon Kim, Sang Hoon Lee, Ji Hyun Lee, Hong Gyu Jung, Seong Whan Lee · SMC · 2021</p></article>
+        </div>
       </section>
 
       <section id="games" class="section-shell" aria-labelledby="games-title">
@@ -50,10 +92,36 @@
           <p class="eyebrow">02 / PLAYGROUND</p>
           <h2 id="games-title">Games</h2>
         </div>
-        <div class="game-placeholder" aria-label="게임 준비 영역">
-          <p class="placeholder-mark">+</p>
-          <h3>Playground is coming soon.</h3>
-          <p>키보드·터치 지렁이 게임과 슬롯 머신을 준비하고 있습니다.</p>
+        <div class="games-grid">
+          <article class="game-card" id="snake-game" aria-labelledby="snake-title">
+            <div class="game-card-heading">
+              <div><div class="eyebrow">01 / SNAKE</div><h3 id="snake-title">지렁이 게임</h3></div>
+              <div class="score-board"><span>점수 <strong id="snake-score">0</strong></span><span>최고 <strong id="snake-high-score">0</strong></span></div>
+            </div>
+            <div class="snake-board-wrap"><canvas id="snake-canvas" width="420" height="420" aria-label="지렁이 게임 보드"></canvas><p id="snake-status" class="game-status" role="status">시작 버튼을 눌러 게임을 시작하세요.</p></div>
+            <div class="game-actions"><button id="snake-start" class="game-button" type="button">시작</button><button id="snake-pause" class="game-button secondary" type="button" disabled>일시정지</button><button id="snake-restart" class="game-button secondary" type="button">재시작</button></div>
+            <div class="direction-pad" aria-label="모바일 방향 조작"><button type="button" data-direction="up" aria-label="위로 이동">↑</button><div><button type="button" data-direction="left" aria-label="왼쪽으로 이동">←</button><button type="button" data-direction="down" aria-label="아래로 이동">↓</button><button type="button" data-direction="right" aria-label="오른쪽으로 이동">→</button></div></div>
+            <p class="game-help">방향키·WASD 또는 아래 버튼으로 조작하세요. 점수가 오를수록 빨라지고 폭탄을 밟으면 종료됩니다.</p>
+          </article>
+
+          <article class="game-card" id="slot-game" aria-labelledby="slot-title">
+            <div class="game-card-heading"><div><div class="eyebrow">02 / SLOT</div><h3 id="slot-title">Lucky Reels</h3></div><span id="slot-status" class="game-status" role="status">READY</span></div>
+            <div class="slot-machine" aria-label="3열 슬롯 머신"><div class="slot-reel" id="slot-reel-1">🍒</div><div class="slot-reel" id="slot-reel-2">🍋</div><div class="slot-reel" id="slot-reel-3">🔔</div></div>
+            <p class="slot-result" id="slot-result">중앙 payline에서 같은 심볼 3개를 맞혀보세요.</p>
+            <button id="slot-start" class="game-button" type="button">SPIN</button>
+            <p class="game-help">🍒·🍋·🔔·BAR·777 중 같은 심볼 3개면 당첨, 777은 최고 당첨입니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section-shell" aria-labelledby="contact-title">
+        <div class="section-heading">
+          <p class="eyebrow">04 / CONNECT</p>
+          <h2 id="contact-title">Contact</h2>
+        </div>
+        <div class="detail-card contact-card">
+          <a class="text-link" href="mailto:jihyuny.lee@samsung.com">jihyuny.lee@samsung.com</a>
+          <span>010-4189-3266</span>
         </div>
       </section>
     </main>
