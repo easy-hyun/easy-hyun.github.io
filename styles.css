@@ -21,7 +21,7 @@ a { color: inherit; text-decoration: none; }
 .site-nav a:hover, .site-nav a:focus-visible, .text-link:hover, .text-link:focus-visible { color: var(--accent); }
 .menu-toggle { background: transparent; border: 1px solid var(--line); color: var(--text); display: none; padding: 7px 12px; }
 .section-shell { margin: 0 auto; max-width: var(--max-width); padding: 0 28px; }
-.hero { min-height: 68vh; padding-bottom: 110px; padding-top: 150px; }
+.hero { min-height: auto; padding-bottom: 76px; padding-top: 150px; }
 .eyebrow { color: var(--accent); font-size: .72rem; font-weight: 700; letter-spacing: .16em; margin: 0 0 18px; }
 h1, h2, h3, p { margin-top: 0; }
 h1 { font-size: clamp(3rem, 8vw, 7.2rem); letter-spacing: -.07em; line-height: .98; margin-bottom: 28px; max-width: 850px; }
@@ -63,10 +63,16 @@ h2 { font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -.06em; }
 .direction-pad button { background: #1a1e22; border: 1px solid var(--line); color: var(--text); font-size: 1.1rem; height: 42px; min-width: 42px; }
 .game-help { color: var(--muted); font-size: .75rem; margin: 14px 0 0; }
 .slot-machine { display: grid; gap: 8px; grid-template-columns: repeat(3, 1fr); margin: 28px 0 18px; }
-.slot-reel { align-items: center; background: #08090b; border: 1px solid var(--line); display: flex; font-size: clamp(2rem, 5vw, 3.5rem); height: 120px; justify-content: center; }
-.slot-reel.is-spinning { animation: reel-shake .12s linear infinite; }
+.slot-reel { --slot-height: 120px; align-items: flex-start; background: #08090b; border: 1px solid var(--line); display: flex; font-size: clamp(2rem, 5vw, 3.5rem); height: var(--slot-height); justify-content: center; overflow: hidden; perspective: 300px; position: relative; }
+.slot-strip { align-items: center; display: flex; flex-direction: column; transform: translateY(0); width: 100%; }
+.slot-strip span { align-items: center; display: flex; flex: 0 0 var(--slot-height); height: var(--slot-height); justify-content: center; width: 100%; }
+.slot-reel::before, .slot-reel::after { content: ''; inset-inline: 0; height: 28%; pointer-events: none; position: absolute; z-index: 1; }
+.slot-reel::before { background: linear-gradient(#08090b, transparent); top: 0; }
+.slot-reel::after { background: linear-gradient(transparent, #08090b); bottom: 0; }
+.slot-reel.is-spinning { border-color: #d66bff; box-shadow: inset 0 18px 22px rgba(0, 0, 0, .8), inset 0 -18px 22px rgba(0, 0, 0, .8), 0 0 18px rgba(214, 107, 255, .28); }
+.slot-reel.is-stopping { animation: reel-lock .18s ease-out; }
 .slot-result { color: var(--muted); min-height: 3.2em; }
-@keyframes reel-shake { 50% { transform: translateY(3px); } }
+@keyframes reel-lock { 0% { transform: translateY(-5px); } 60% { transform: translateY(3px); } 100% { transform: translateY(0); } }
 .card-index, .placeholder-mark { color: var(--accent); font-size: .8rem; font-weight: 700; }
 .research-card h3, .game-placeholder h3 { font-size: 1.5rem; margin-bottom: 8px; }
 .research-card p:last-child, .game-placeholder p:last-child { color: var(--muted); margin-bottom: 0; }
@@ -86,7 +92,7 @@ h2 { font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -.06em; }
   .site-nav.is-open { display: flex; }
   .site-nav a { padding: 10px; }
   .section-shell { padding-left: 20px; padding-right: 20px; }
-  .hero { min-height: 70vh; padding-bottom: 80px; padding-top: 110px; }
+  .hero { min-height: auto; padding-bottom: 56px; padding-top: 110px; }
   .research-card, .detail-card { gap: 18px; margin-bottom: 80px; padding: 24px; }
   .card-grid { grid-template-columns: 1fr; }
   .games-grid { grid-template-columns: 1fr; }
@@ -95,9 +101,9 @@ h2 { font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -.06em; }
   .contact-card { align-items: flex-start; flex-direction: column; gap: 8px; }
   .game-placeholder, .game-card { margin-bottom: 80px; padding: 24px; }
   .direction-pad { display: block; }
-  .slot-reel { height: 92px; }
+  .slot-reel { --slot-height: 92px; }
   .site-footer { align-items: flex-start; flex-direction: column; gap: 8px; }
 }
 
 @media (min-width: 641px) and (max-width: 900px) { .games-grid { grid-template-columns: 1fr; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .slot-reel.is-spinning { animation: none; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

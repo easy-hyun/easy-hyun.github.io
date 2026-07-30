@@ -119,11 +119,21 @@
   const reels = [1, 2, 3].map((number) => document.querySelector(`#slot-reel-${number}`));
   const slotStart = document.querySelector('#slot-start'); const slotStatus = document.querySelector('#slot-status'); const slotResult = document.querySelector('#slot-result');
   let slotTimer = null; let stopTimers = []; let slotSpinning = false;
-  function finishSlot() { const result = reels.map((reel) => reel.textContent); const won = result.every((symbol) => symbol === result[0]); slotResult.textContent = won ? `${payout[result[0]]} · ${result.join(' ')}` : `${result.join(' ')} · 다음 기회에!`; slotStatus.textContent = won ? (result[0] === '777' ? 'JACKPOT!' : 'WIN') : 'TRY AGAIN'; slotSpinning = false; slotStart.disabled = false; }
+  function finishSlot() { const result = reels.map((reel) => reel.dataset.result); const won = result.every((symbol) => symbol === result[0]); slotResult.textContent = won ? `${payout[result[0]]} · ${result.join(' ')}` : `${result.join(' ')} · 다음 기회에!`; slotStatus.textContent = won ? (result[0] === '777' ? 'JACKPOT!' : 'WIN') : 'TRY AGAIN'; slotSpinning = false; slotStart.disabled = false; }
   function spinSlot() {
-    if (slotSpinning) return; slotSpinning = true; slotStart.disabled = true; slotStatus.textContent = 'SPINNING'; slotResult.textContent = '릴이 순서대로 멈춥니다.'; reels.forEach((reel) => reel.classList.add('is-spinning')); if (slotTimer) clearInterval(slotTimer); stopTimers.forEach((timer) => clearTimeout(timer)); stopTimers = [];
-    slotTimer = setInterval(() => reels.forEach((reel) => { reel.textContent = symbols[Math.floor(Math.random() * symbols.length)]; }), 80);
-    [900, 1500, 2100].forEach((delay, index) => { stopTimers.push(setTimeout(() => { reels[index].classList.remove('is-spinning'); reels[index].textContent = symbols[Math.floor(Math.random() * symbols.length)]; if (index === reels.length - 1) { clearInterval(slotTimer); slotTimer = null; finishSlot(); } }, delay)); });
+    if (slotSpinning) return; slotSpinning = true; slotStart.disabled = true; slotStatus.textContent = 'SPINNING'; slotResult.textContent = '릴이 실제처럼 아래로 굴러가며 순서대로 멈춥니다.'; if (slotTimer) clearInterval(slotTimer); stopTimers.forEach((timer) => clearTimeout(timer)); stopTimers = [];
+    const stopDelays = [1100, 2200, 3300];
+    reels.forEach((reel, index) => {
+      const strip = reel.querySelector('.slot-strip');
+      const sequence = Array.from({ length: 24 }, () => symbols[Math.floor(Math.random() * symbols.length)]);
+      const result = symbols[Math.floor(Math.random() * symbols.length)];
+      sequence.push(result);
+      strip.innerHTML = sequence.map((symbol) => `<span>${symbol}</span>`).join('');
+      reel.dataset.result = result; reel.classList.add('is-spinning'); strip.style.transition = 'none'; strip.style.transform = 'translateY(0)';
+      void strip.offsetHeight;
+      requestAnimationFrame(() => { const reelHeight = reel.getBoundingClientRect().height; strip.style.transition = `transform ${stopDelays[index]}ms cubic-bezier(.12,.75,.18,1)`; strip.style.transform = `translateY(-${(sequence.length - 1) * reelHeight}px)`; });
+      stopTimers.push(setTimeout(() => { reel.classList.remove('is-spinning'); reel.classList.add('is-stopping'); setTimeout(() => reel.classList.remove('is-stopping'), 180); if (index === reels.length - 1) finishSlot(); }, stopDelays[index]));
+    });
   }
   if (slotStart) slotStart.addEventListener('click', spinSlot);
 })();
