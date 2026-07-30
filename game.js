@@ -78,7 +78,35 @@
     context.fillStyle = '#0a0d0d'; context.fillRect(0, 0, canvas.width, canvas.height); context.strokeStyle = '#151a1b';
     for (let i = 0; i <= gridSize; i += 1) { context.beginPath(); context.moveTo(i * cellSize, 0); context.lineTo(i * cellSize, canvas.height); context.stroke(); context.beginPath(); context.moveTo(0, i * cellSize); context.lineTo(canvas.width, i * cellSize); context.stroke(); }
     context.fillStyle = '#ffbd55'; context.fillRect(food.x * cellSize + 4, food.y * cellSize + 4, cellSize - 8, cellSize - 8);
-    if (bomb) { const bombX = bomb.x * cellSize + cellSize / 2; const bombY = bomb.y * cellSize + cellSize / 2 + 2; context.fillStyle = '#151719'; context.beginPath(); context.arc(bombX, bombY, cellSize / 2 - 3, 0, Math.PI * 2); context.fill(); context.fillStyle = '#3d4145'; context.fillRect(bombX - 3, bombY - 11, 6, 4); context.strokeStyle = '#b77b4b'; context.lineWidth = 2; context.beginPath(); context.moveTo(bombX, bombY - 10); context.quadraticCurveTo(bombX + 5, bombY - 15, bombX + 7, bombY - 12); context.stroke(); context.fillStyle = '#ffd166'; context.beginPath(); context.arc(bombX + 8, bombY - 12, 2, 0, Math.PI * 2); context.fill(); }
+    if (bomb) {
+      const trapX = bomb.x * cellSize + cellSize / 2;
+      const trapY = bomb.y * cellSize + cellSize / 2;
+      const pulse = 0.82 + Math.sin(Date.now() / 140) * 0.12;
+      context.save();
+      context.shadowColor = '#d66bff';
+      context.shadowBlur = 12;
+      context.fillStyle = `rgba(214, 107, 255, ${pulse})`;
+      context.beginPath();
+      context.arc(trapX, trapY, cellSize / 2 - 3, 0, Math.PI * 2);
+      context.fill();
+      context.shadowBlur = 0;
+      context.strokeStyle = '#f3c7ff';
+      context.lineWidth = 1.5;
+      context.beginPath();
+      context.moveTo(trapX, trapY - 9); context.lineTo(trapX + 4, trapY - 5);
+      context.lineTo(trapX + 8, trapY - 7); context.lineTo(trapX + 6, trapY - 2);
+      context.moveTo(trapX - 9, trapY + 1); context.lineTo(trapX - 6, trapY - 3);
+      context.lineTo(trapX - 8, trapY - 8); context.moveTo(trapX - 6, trapY + 7);
+      context.lineTo(trapX - 2, trapY + 9); context.moveTo(trapX + 5, trapY + 8);
+      context.lineTo(trapX + 9, trapY + 4); context.stroke();
+      context.fillStyle = '#ffffff';
+      context.beginPath();
+      context.moveTo(trapX + 1, trapY - 8); context.lineTo(trapX - 3, trapY + 1);
+      context.lineTo(trapX + 1, trapY); context.lineTo(trapX - 1, trapY + 8);
+      context.lineTo(trapX + 6, trapY - 3); context.lineTo(trapX + 2, trapY - 2);
+      context.closePath(); context.fill();
+      context.restore();
+    }
     snake.forEach((part, index) => { context.fillStyle = gameOver ? '#6d4545' : index === 0 ? '#b8f28e' : '#72bd54'; context.fillRect(part.x * cellSize + 2, part.y * cellSize + 2, cellSize - 4, cellSize - 4); });
   }
   const keyMap = { ArrowUp: 'up', w: 'up', W: 'up', ArrowDown: 'down', s: 'down', S: 'down', ArrowLeft: 'left', a: 'left', A: 'left', ArrowRight: 'right', d: 'right', D: 'right' };
